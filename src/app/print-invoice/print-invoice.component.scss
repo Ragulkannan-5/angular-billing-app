@@ -1,0 +1,85 @@
+@media (min-width: 1400px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+        max-width: 1920px;
+    }
+}
+.title {
+      color: #006400;
+      font-weight: bold;
+      font-size: 24px;
+    }
+    .heading {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #d35400;
+    letter-spacing: 1px;
+  }
+
+  .title {
+    font-family: 'Segoe UI', sans-serif;
+    text-transform: uppercase;
+  }
+
+  .contact-section {
+    background-color: #fdf2e9;
+    border-radius: 8px;
+    padding: 15px 20px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  }
+
+  .contact-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .contact-section li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+  }
+
+  .contact-section a {
+    text-decoration: none;
+    color: #2980b9;
+    font-weight: 500;
+  }
+
+  .contact-section a:hover {
+    text-decoration: underline;
+  }
+
+  .estimate-info {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .invoice {
+  font-family: 'Segoe UI', sans-serif;
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+  color: #333;
+}
+
+.header {
+  text-align: center;
+  font-size: 28px;
+  color: green;
+  margin-bottom: 10px;
+}
+
+.contact-details {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.contacts p,
+.bill-info p {
+  margin: 4px 0;
+  font-size: 14px;
+}

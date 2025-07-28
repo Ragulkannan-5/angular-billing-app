@@ -1,0 +1,41 @@
+
+
+  <div class="container" style="padding:0; max-height: 900px;max-width: '1320px'">
+    <div mat-dialog-title 
+         style="height: 30px; background-color: var(--theme-background) !important; 
+                color: var(--theme-color) !important; 
+                padding: 0.25rem !important; /* Reduced padding */
+                margin-bottom: 0px !important; 
+                display: flex; 
+                justify-content: space-between;
+                align-items: center;">
+      <div>
+        <b style="margin-left: 0.5rem; color: var(--theme-color) !important; font-size: smaller;">Report Preview</b> <!-- Reduced font size -->
+      </div>
+      <div>
+        <mat-icon style="color: var(--theme-color) !important; cursor: pointer; padding-top: 4px;" align="end" mat-button mat-dialog-close>close</mat-icon>
+      </div>
+    </div>
+    
+    <!-- Content Section -->
+    <mat-dialog-content class="mat-typography" style="padding: 0; ">
+      <app-print-invoice id="printable-area" ></app-print-invoice>
+    </mat-dialog-content>
+    
+    <!-- Smaller Footer -->
+    <mat-dialog-actions align="end" style="background-color: var(--theme-background) !important; padding: 0.5rem;"> <!-- Reduced padding -->
+      <button mat-raised-button (click)="printContent()"
+              style="background-color: #3877f3; color: white; height: 32px; font-size: smaller; margin-right: 0.5rem;"> <!-- Reduced button height -->
+        Save
+      </button>
+      <button mat-raised-button 
+              style="background-color: #f3383e; color: white; height: 32px; font-size: smaller;" 
+              mat-button mat-dialog-close >Close
+      </button>
+    </mat-dialog-actions>
+    </div>
+    <!-- Hidden or styled print content -->
+
+
+<!-- Button to trigger print -->
+<button (click)="printContent()">🖨️ Print</button>
