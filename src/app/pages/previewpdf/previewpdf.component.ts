@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { CommonService } from '../common.service';
+import { CommonService } from '../../commonservice/common.service';
 @Component({
   selector: 'app-previewpdf',
   templateUrl: './previewpdf.component.html',

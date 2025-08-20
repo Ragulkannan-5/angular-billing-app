@@ -1,0 +1,120 @@
+ 
+
+
+<mat-card class="card">
+
+    <mat-accordion class="cardstyle">
+        <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+          <mat-expansion-panel-header>
+            <mat-panel-title> <span> <label>Client Details </label></span> &nbsp;
+    <button class="btn btn-success btn-sm" (click)="openClientDialog()" style="zoom: 0.7; margin-bottom: 2px;" ><i class="bi bi-plus-lg"></i></button>
+   </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-divider></mat-divider>
+<div class="d-flex justify-content-between align-items-center mb-3 ">
+ <div class="row Lapview">
+    <div class="col" style="
+    min-width: 300px;
+">
+       <div class="contacts">
+        
+        <p><strong>Bill To:</strong><br>
+          {{commonService.clientname}}<br>
+          {{commonService.clientAddress}}<br>
+           Phone :{{commonService.clientphoneno}}</p>
+      </div>
+    </div>
+    <div class="col">
+      <p><strong>Estimate No:</strong>{{commonService.estimateNo}}</p>
+        <p><strong>Estimate Date:</strong> {{commonService.estimateDate || 'dd-MM-yyyy' }}</p>
+    </div>
+    <div class="col">
+      <label for="discount" style=" display: flex; align-items: center;" class="me-2">Discount %:</label>
+    <input
+      type="number"
+      class="form-control"
+      [(ngModel)]="commonService.discountPercent"
+      (input)="recalculateAll()"
+      min="0"
+      max="100"
+      style="width: 70px"
+    />
+    </div>
+  </div>
+
+</div>
+        </mat-expansion-panel>
+    </mat-accordion>
+    
+  <table class="table table-bordered table-hover table-striped" style="border-radius: 4px !important;">
+    <thead class="table-secondary">
+      <tr>
+        <th class="bgcolor" style="width: 80px;">S.No</th>
+        <th class="bgcolor" >Product</th>
+        <th class="bgcolor" >Quantity</th>
+        <th class="bgcolor" >Price</th>
+        <th class="bgcolor" >Total</th>
+        <th class="bgcolor" >Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of commonService.rows; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td style="width: 900px;">
+          <input
+            list="products"
+            [(ngModel)]="row.productName"
+            (change)="onProductChange(row)"
+            class="form-control" 
+          />
+        </td>
+        <td style="width: 200px;">
+          <input
+            type="number"
+            [(ngModel)]="row.quantity"
+            min="1"
+            (input)="recalculate(row)"
+            class="form-control"  
+          />
+        </td>
+        <td style="width: 200px;">
+          <input
+            type="number"
+            [(ngModel)]="row.price"
+            min="0"
+            (input)="recalculate(row)"
+            class="form-control" 
+          />
+        </td>
+        <td style="width: 200px;">{{ row.total }}</td>
+        <td style="width: 200px;">
+          <button class="btn btn-danger btn-sm" (click)="deleteRow(i)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+  </svg></button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4" class="text-end"><strong>Sub Total</strong></td>
+        <td colspan="2">{{ commonService.subtotalAmount.toFixed(2) }}</td>
+      </tr>
+      <tr>
+        <td colspan="4" class="text-end"><strong>Total Discount ({{ commonService.discountPercent }}%)</strong></td>
+        <td colspan="2">{{ commonService.totalDiscountPrice.toFixed(2) }}</td>
+      </tr>
+      <tr>
+        <td colspan="4" class="text-end"><strong>Total Amount</strong></td>
+        <td colspan="2">{{ commonService.totalAmount.toFixed(2) }}</td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <datalist id="products">
+    <option *ngFor="let p of products" [value]="p.productName"></option>
+  </datalist>
+</mat-card>
+
+ 
+

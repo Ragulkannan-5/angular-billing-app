@@ -3,19 +3,28 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Product {
-  name: string;
+  id: number;
+  productNumber: number;
+  productName: string;
   price: number;
+  shortcut: string;
+  category: string;
+  baseQuantity: string;
+  stackoverall:number;
+  currentstack:number;
+  isActive: boolean;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  private productsUrl = 'assets/products.json';
+  private productsUrl = 'http://localhost:7200/Productlist/Getproduct';
 
   constructor(private http: HttpClient) { }
 
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.productsUrl);
+    return this.http.get<Product[]>(this.productsUrl,);
   }
+  
 }

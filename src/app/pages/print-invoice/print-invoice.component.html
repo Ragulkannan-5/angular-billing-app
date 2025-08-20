@@ -78,9 +78,9 @@
         <tr *ngFor="let item of commonService.rows let i = index">
           <td>{{ i + 1}}</td>
           <td>{{ item.productName }}</td>
-          <td>₹{{ item.price.toFixed(2) }}</td>
+          <td>₹{{ item.price }}</td>
           <td>{{ item.quantity }}</td>
-          <td>₹{{ item.total.toFixed(2) }}</td>
+          <td>₹{{ item.total }}</td>
         </tr>
       </tbody>
       <tfoot>

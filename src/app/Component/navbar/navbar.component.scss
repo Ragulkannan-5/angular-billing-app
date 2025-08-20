@@ -1,0 +1,23 @@
+.bg{
+    color: black !important;
+    background-color: rgb(255, 255, 255);
+}
+
+.bgicon{
+     background-color: rgb(255, 255, 255);
+     color: black !important;
+}
+.lapview{
+        display: block;
+    }
+.phoneview{
+        display: none;
+    }
+@media (max-width: 768px) { 
+    .phoneview{
+        display: block;
+    }
+    .lapview{
+        display: none;
+    }
+}

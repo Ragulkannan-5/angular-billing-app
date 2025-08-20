@@ -1,0 +1,58 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-success px-3 py-2 rounded-top lapview">
+  <div class="container-fluid">
+    <div class="d-flex align-items-center">
+      <a class="nav-link text-white fw-bold" href="#">SHASHMITHA CRACKERS</a>
+      <!-- <button class="btn btn-light btn-sm me-3 dropdown-toggle" type="button">
+        All Tabs
+      </button> -->
+      <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-row gap-3">
+        <li class="nav-item"><a class="nav-link text-white fw-bold" href="#">Home</a></li>
+        <li class="nav-item"><a class="nav-link text-white fw-bold" href="#">Patient</a></li>
+        <li class="nav-item"><a class="nav-link text-white fw-bold" href="#">Patient Consent</a></li>
+        <li class="nav-item"><a class="nav-link text-white fw-bold" href="#">Appointments</a></li>
+        <li class="nav-item"><a class="nav-link text-white fw-bold" href="#">Patient Visits</a></li>
+        <li class="nav-item"><a class="nav-link text-white fw-bold" href="#">Chief Complaints</a></li>
+        <li class="nav-item"><a class="nav-link text-white fw-bold" href="#">Invoices</a></li>
+        <li class="nav-item"><a class="nav-link text-white fw-bold" href="#">Reports</a></li>
+        <li class="nav-item"><a class="nav-link text-white fw-bold" href="#">•••</a></li>
+      </ul> -->
+    </div>
+    <div class="d-flex align-items-center gap-3">
+      <button class="btn btn-light btn-sm" (click)="commonService.addRow()" ><i class="bi bi-plus-lg"></i></button>
+      <i class="bi bi-search text-white fs-5" (click)="pdfdownload()"></i>
+      <i class="bi bi-bell text-white fs-5" (click)="goToPrint()"></i>
+      <i class="bi bi-calendar text-white fs-5"></i>
+      <i class="bi bi-gear text-white fs-5" (click)=" openDialog()"></i>
+      <span (click)="printContent()"><svg xmlns="http://www.w3.org/2000/svg"  width="36" height="26" style="color: honeydew;cursor: pointer;" fill="currentColor" class="bi bi-printer-fill" viewBox="0 0 16 16">
+  <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1"/>
+  <path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
+</svg></span>
+      <img src="images\avatar.webp" alt="Profile" class="rounded-circle" width="30" height="30">
+    </div>
+  </div>
+</nav>
+<nav class="phoneview">
+ <div class=" navbar-dark bg-success d-flex align-items-center " style="
+    display: flex;
+    justify-content: space-around;
+    height: 36px;
+    font-family: emoji;
+">
+      <a class="nav-link text-white fw-bold" href="#">SHASHMITHA CRACKERS</a>
+</div>
+<div class="card bg" style="padding: 10px; margin: 5px;">
+  <div class="d-flex justify-content-between align-items-center" style="padding: 10px;">
+       <button class="btn btn-light btn-sm bgicon" (click)="commonService.addRow()" style="display: flex;flex-direction: column;"><i class="bi bi-plus-lg bgicon"></i> add row</button>
+       <button class="btn btn-light btn-sm bgicon" (click)="pdfdownload()" style="display: flex;flex-direction: column;"><i class="bi bi-search text-white fs-5 bgicon" ></i>PDF</button>
+        <button class="btn btn-light btn-sm bgicon" (click)="goToPrint()" style="display: flex;flex-direction: column;" > <i class="bi bi-bell text-white fs-5 bgicon" ></i>Print</button>
+         <button class="btn btn-light btn-sm bgicon"  (click)=" openDialog()" style="display: flex;flex-direction: column;"><i class="bi bi-gear text-white fs-5 bgicon"></i>Pdf preview</button>
+       <span (click)="printContent()"><svg xmlns="http://www.w3.org/2000/svg"  width="36" height="26" style="color: rgb(0, 0, 0);cursor: pointer;" fill="currentColor" class="bi bi-printer-fill" viewBox="0 0 16 16">
+  <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1"/>
+  <path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
+</svg></span>
+     
+  </div>
+    </div>
+    </nav>
+
+<app-print-invoice id="printable-area"  style="display: none;" ></app-print-invoice>

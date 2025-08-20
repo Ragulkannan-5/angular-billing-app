@@ -1,0 +1,53 @@
+<div class="container mt-4"> 
+  <div class="row mb-3 align-items-center g-2">
+    <!-- Search Field -->
+    <div class="col-12 col-md-auto">
+      <mat-form-field appearance="outline" style="min-width: 250px;">
+        <mat-label>Search Bills</mat-label>
+        <input matInput placeholder="Type client/phone..." [(ngModel)]="searchText" (input)="applyFilter()" />
+        <button mat-icon-button matSuffix *ngIf="searchText" style="zoom: 0.6;" (click)="searchText=''; applyFilter()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+    <!-- Action Button -->
+    <div class="col-12 col-md-auto">
+      <button mat-raised-button color="primary" (click)="addBill()">
+        <mat-icon>add</mat-icon> Add Bill
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 col-sm-6 mb-4" *ngFor="let bill of filteredBills">
+      <mat-card class="example-card" appearance="outlined" style="zoom: 0.8;">
+        <mat-card-header>
+          <mat-card-title-group>
+            <mat-card-title>{{ bill.clientname }}</mat-card-title>
+            <mat-card-subtitle>Bill No: {{ bill.billno }}</mat-card-subtitle>
+            <mat-card-subtitle>Status: {{ bill.billstatus }}</mat-card-subtitle>
+          </mat-card-title-group>
+        </mat-card-header>
+        
+        <mat-divider></mat-divider>
+        
+        <mat-card-content>
+          <div>Phone: {{ bill.phoneno }}</div>
+          <div>Address: {{ bill.address }}</div>
+          <div>Created: {{ bill.billcreatedate | date:'short' }}</div>
+          <div>Updated: {{ bill.lastupdatedate | date:'short' }}</div>
+        </mat-card-content>
+
+        <mat-action-list style="display: flex; zoom: 0.9;">
+          <button class="button edit-btn" (click)="editBill(bill)">
+            <mat-icon>edit</mat-icon> <span>Edit</span>
+          </button>
+          <button class="button delete-btn" (click)="deleteBill(bill)">
+            <mat-icon>delete</mat-icon> <span>Delete</span>
+          </button>
+        </mat-action-list>
+      </mat-card>
+    </div>
+  </div>
+</div>

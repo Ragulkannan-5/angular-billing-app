@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommonService } from '../common.service';
+import { CommonService } from '../../commonservice/common.service';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { MatDialog } from '@angular/material/dialog';

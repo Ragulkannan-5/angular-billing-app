@@ -1,0 +1,52 @@
+.dash{
+    padding: 0;
+    margin: 0;
+    
+}
+.matcord{
+    border-radius: 2px;
+}
+
+
+  
+  mat-sidenav-container {
+  height: 100%; /* subtract toolbar height */
+}
+mat-toolbar{
+  background-color: #283593;
+
+}
+mat-sidenav-content{
+  padding: 5px;
+}
+
+
+.content-area{
+  margin-top: 10px;;
+}
+
+
+
+
+mat-sidenav-container {
+  height: 100%; /* subtract toolbar height */
+}
+mat-toolbar{
+  background-color: #283593;
+
+}
+.toolbar{
+max-height: calc(100vh - 100px) !important;
+}
+mat-sidenav-content{
+  padding: 5px;
+}
+
+
+.content-area{
+  margin-top: 10px;;
+}
+
+
+
+

@@ -1,12 +1,12 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, signal } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { Product, ProductService } from '../services/product.service';
+import { Product, ProductService } from '../../services/product.service';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { Router } from '@angular/router';
-import { CommonService } from '../common.service';
+import { CommonService } from '../../commonservice/common.service';
 import { HttpClient } from '@angular/common/http';
 import {
   MatDialog,
@@ -18,6 +18,7 @@ import {
 } from '@angular/material/dialog';
 import { PrintInvoiceComponent } from '../print-invoice/print-invoice.component';
 import { PreviewpdfComponent } from '../previewpdf/previewpdf.component';
+import { ClientdetailsComponent } from '../../Component/clientdetails/clientdetails.component';
 
 interface ProductRow {
   productName: string;
@@ -33,9 +34,11 @@ interface ProductRow {
 })
 export class BillingComponent implements OnInit {
   products: any[] = [];
+  readonly panelOpenState = signal(false);
    constructor(private router: Router,public commonService :CommonService,private http: HttpClient,private dialog: MatDialog) {}
-  ngOnInit(): void {
-     this.http.get<any[]>('jsonfile/Generated.json').subscribe(data => {
+  
+   ngOnInit(): void {
+     this.http.get<any[]>('http://localhost:7200/Productlist/Getproduct').subscribe(data => {
       this.products = data;
     });
   }
@@ -47,21 +50,6 @@ export class BillingComponent implements OnInit {
     }
   }
 
-  openDialog() {
-this.dialog.open(PreviewpdfComponent, {
-width: '1320px',
-maxHeight:'900px;',
-data: { message: 'Hello, Angular Material!' },
-});
-}
-
-
-goToPrint() {
-  this.router.navigate(['/print-invoice'], {
-    state: {
-    }
-  });
-}
   // products = [
   //   { name: "Gaming Mouse", price: 500 },
   //   { name: "Gaming Keyboard", price: 1200 },
@@ -83,7 +71,7 @@ goToPrint() {
 
   onProductChange(row: ProductRow) {
     const found = this.products.find(p => 
-        p.name === row.productName
+        p.productName === row.productName
     );
     if (found) {
       row.price = found.price;
@@ -103,20 +91,19 @@ goToPrint() {
     this.commonService.rows.forEach(row => this.recalculate(row));
   }
 
-  printContent() {
+  openClientDialog(): void {
+  const dialogRef = this.dialog.open(ClientdetailsComponent, {
+    width: '100%',
+    maxWidth: '500px'
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      console.log('Client Details:', result);
+    }
+  });
+  }
+
  
-  const printContents = document.getElementById('printable-area')!.innerHTML;
-
-  const originalContents = document.body.innerHTML;
-
-  // Replace the entire body with just the content to print
-  document.body.innerHTML = printContents;
-
-  window.print(); // ⬅️ This opens the real system print dialog
-
-  document.body.innerHTML = originalContents;
-  location.reload(); // reload to restore Angular bindings
-
-}
 
 }
