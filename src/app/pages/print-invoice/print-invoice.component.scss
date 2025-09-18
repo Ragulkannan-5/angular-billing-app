@@ -68,6 +68,7 @@
   font-size: 28px;
   color: green;
   margin-bottom: 10px;
+   height: 6px;
 }
 
 .contact-details {
@@ -83,3 +84,72 @@
   margin: 4px 0;
   font-size: 14px;
 }
+
+ body {
+     font-family: Arial, sans-serif;
+     margin: 20px;
+     color: #333;
+ }
+
+ .invoice-box {
+     max-width: 800px;
+      max-height:100vh;
+     margin: auto;
+     padding: 30px;
+ }
+
+//  .header {
+//      text-align: center;
+//      margin-bottom: 20px;
+//  }
+
+//  .header h1 {
+//      margin: 0;
+//      color: #4CAF50; /* A simple color for the heading */
+//  }
+ 
+ .details {
+     margin-bottom: 10px;
+ }
+  .details-table{
+ width: 100%;
+  }
+ 
+ /* Using a simple table for layout of details */
+ .details-table th, .details-table td {
+   border: 1px solid #ddd; 
+     padding: 8px;
+    
+ }
+
+ .bill-table {
+     width: 100%;
+     border-collapse: collapse; /* Removes space between borders */
+ }
+
+ .bill-table th, .bill-table td {
+     border: 1px solid #ddd;
+     padding: 8px;
+     text-align: left;
+ }
+
+ .bill-table thead {
+     background-color: #f2f2f2; /* Light grey background for the header */
+ }
+ 
+ /* Aligning numbers to the right for better readability */
+ .bill-table td.number, .bill-table th.number {
+     text-align: right;
+ }
+
+ .summary {
+     text-align: right;
+     margin-top: 20px;
+ }
+ 
+ .footer {
+     text-align: center;
+     margin-top: 30px;
+     font-size: 0.9em;
+     color: #777;
+ }

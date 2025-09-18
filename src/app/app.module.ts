@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -39,6 +39,17 @@ import { MatSelectModule } from '@angular/material/select';
 import { ProductaddeditComponent } from './Component/productaddedit/productaddedit.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { BilldetailspageComponent } from './pages/billdetailspage/billdetailspage.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
+
+export function loadConfig() {
+  return () => fetch('jsonfile/config.json')
+    .then(res => res.json())
+    .then(cfg => {
+      (window as any).appConfig = cfg;
+    });
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -89,9 +100,12 @@ import { BilldetailspageComponent } from './pages/billdetailspage/billdetailspag
     MatCardTitle,
     MatCardSubtitle,
     MatCardActions,
-    MatCardTitleGroup
+    MatCardTitleGroup,
+     SweetAlert2Module.forRoot()
 ],
-  providers: [],
+   providers: [
+    { provide: APP_INITIALIZER, useFactory: loadConfig, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

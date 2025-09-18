@@ -1,107 +1,77 @@
-  <div  #pdfContent id="pdf-content" class="invoice-box mt-5 bordered-content" style="padding: 10px;margin-top: 0 !important;">
-    <div class="header">
-      <h1>SHASHMITHA CRACKERS</h1>
-    </div>
-  <mat-divider></mat-divider>
-    <div class="contact-details">
-      <div class="contacts">
-        <p><strong>Estimate No:</strong> #EST12345</p>
-        <p><strong>Estimate Date:</strong> 23-Jul-2025</p>
-        <p><strong>Bill To:</strong><br>Customer Name<br>Address Line 1<br>City, Zip</p>
-        
-      </div>
-
-      <div class="bill-info">
-        <p><i class="fa fa-phone text-danger"></i> Saravana Kumar: <a href="#">3636435435</a></p>
-      <!--  <p><i class="fa fa-phone text-danger"></i> Babu: <a href="#">6383482870</a></p> -->
-        <p><i class="fa fa-circle text-success"></i> Vinod (WhatsApp): <a href="#">345365345</a></p>
-        <!-- <p><i class="fa fa-phone text-danger"></i> Gopalsamy: <a href="#">9443381678</a></p> -->
-        <!-- <p><i class="fa fa-envelope text-secondary"></i> Email: <a href="#">{{"s.yasini1234@gmail.com"}}</a></p> -->
-      </div>
-    </div>
-    <!-- <div class="text-center">
-      <h2 class="heading"><div class="title">SHASHMITHA CRACKERS</div></h2>
-      <p><strong>Estimate #:</strong> {{ commonService.estimateNo }} | <strong>Date:</strong> {{ commonService.estimateDate }}</p>
-    </div>
-
-    <div class="text-center container">
-    <div class="row">
-        <div class="col-sm" style="max-width: 400px; margin: auto;">
-    <ul style="list-style: none; padding: 0; font-family: sans-serif;">
-      <li style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-        <span>📞 Saravana Kumar</span>
-        <a href="tel:9500854503">9500854503</a>
-      </li>
-      <li style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-        <span>📞 Babu</span>
-        <a href="tel:6383482870">63834 82870</a>
-      </li>
-      <li style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-        <span>🟢 Vinod (WhatsApp)</span>
-        <a href="https://wa.me/8925179210" target="_blank">8925179210</a>
-      </li>
-      <li style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-        <span>📞 Gopalsamy</span>
-        <a href="tel:9443381678">9443381678</a>
-      </li>
-      <li style="display: flex; justify-content: space-between;">
-        <span>✉️ Email</span>
-        <a href="mailto:s.yasini1234@gmail.com">{{"s.yasini1234@gmail.com"}}</a>
-      </li>
-    </ul>
-      </div>
-      
-      <div class="col-sm" style="display: flex;justify-content: flex-end;">
-      <div class="mt-4">
-      <h5>Contact</h5>
-    <h5 class="section-title">Estimate Bill</h5>
-          <p><strong>Estimate No:</strong> #EST12345</p>
-          <p><strong>Estimate Date:</strong> 23-Jul-2025</p>
-          <p><strong>Bill To:</strong> <br> Customer Name<br> Address Line 1<br> City, Zip</p>
-
-    </div>
-      </div>
-    </div>
-  </div> -->
-
-    <table class="table table-bordered mt-4 text-center" style="border: 1px black;">
-      <thead >
+  <div>
+       <div class="header" style="background-color: #f2f2f2">
+              <h3>ESTIMATE BILL</h3>
+            </div>
+<div class="details ">
+    <table class="details-table " >
+      <!-- <tr style="height: 30px !important;">
+          <td colspan="2" style="height: 50px !important;">
+              <div class="header">
+              <h3>ESTIMATE BILL</h3>
+              <p>Your One-Stop Shop for Fireworks</p>
+            </div>
+          </td>
+      </tr> -->
         <tr>
-          <th style="width: 10%; background-color: hotpink;">S.No</th>
-            <th style="width: 50% ;background-color: hotpink;">Item</th>
-        <th style="width: 10% ;background-color: hotpink;">Price</th>
-        <th style="width: 10%;background-color: hotpink;">Quantity</th>
-        <th style="width: 20%;background-color: hotpink;">Total</th>
+           <td colspan="1" style="padding-top: 0;">
+              <strong>Billed To:</strong><br>
+                {{commonService.clientname}}<br>
+                {{commonService.clientAddress}}<br>
+               <strong>Phone No:</strong>{{commonService.clientphoneno}}
+            </td>
+            <td colspan="1" style="width: 40%;">
+                <strong>Billed From:</strong><br>
+              <strong>Saravana Kumar:</strong>  3636435435 <br>
+              <strong>Vinod (WhatsApp):</strong>  345365345<br>
+              <!-- <strong>Balaram:</strong>  345365345><br> -->
+                <strong>Invoice #:</strong> EST{{commonService.estimateNo}}<br>
+                <strong>Date:</strong> {{commonService.estimateDate |date:'dd-MM-yyyy'}}
+            </td>
         </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of commonService.rows let i = index">
+    </table>
+</div>
+  
+<table class="bill-table">
+    <thead>
+        <tr>
+            <th >S.No</th>
+            <th style="width: 900px;">Item</th>
+            <th class="number">Price</th>
+            <th class="number">Quantity</th>
+            <th class="number">Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- You can manually add, edit, or remove these <tr> blocks -->
+         <tr *ngFor="let item of commonService.rows let i = index">
           <td>{{ i + 1}}</td>
           <td>{{ item.productName }}</td>
-          <td>₹{{ item.price }}</td>
-          <td>{{ item.quantity }}</td>
-          <td>₹{{ item.total }}</td>
+          <td class="number">₹{{ item.price.toFixed(2) }}</td>
+          <td class="number">{{ item.quantity }}</td>
+          <td class="number">₹{{ item.total.toFixed(2) }}</td>
         </tr>
-      </tbody>
-      <tfoot>
         <tr>
-          <td colspan="4" class="text-end">Subtotal</td>
+          <td colspan="4" class="text-end number">Subtotal</td>
           <td>₹{{ commonService.subtotalAmount.toFixed(2) }}</td>
         </tr>
         <tr>
-          <td colspan="4" class="text-end">Discount ({{ commonService.discountPercent }}%)</td>
-          <td>- ₹{{ commonService.totalDiscountPrice.toFixed(2) }}</td>
+          <td colspan="4" class="text-end number">Discount ({{ commonService.discountPercent }}%)</td>
+          <td>₹{{ commonService.totalDiscountPrice.toFixed(2) }}</td>
         </tr>
         <tr class="total-row">
-          <td colspan="4" class="text-end">Grand Total</td>
+          <td colspan="4" class="text-end number">Grand Total</td>
           <td>₹{{ commonService.totalAmount.toFixed(2) }}</td>
         </tr>
-      </tfoot>
-    </table>
+    </tbody>
+</table>
 
+<div class="summary" [style.display]="commonService.extradis ? 'block' : 'none'">
+    <p><strong> EXT Total Discount ({{ commonService.ExtdiscountPercent }}%) :</strong>  {{ commonService.ExttotalDiscountPrice.toFixed(2) }}</p>
+    <p><strong>Grand Total: </strong> {{ commonService.ExttotalAmount.toFixed(2) }}</p>
+</div>
+
+<div >
+  <p class="header">Thank you for your purchase. Have a safe and joyful celebration!</p>
+</div>
     
-
-    <p class="footer-note mt-3 text-center">Thank you for your purchase. Have a safe and joyful celebration!</p>
   </div>
-<!-- <button (click)=" downloadPDF()">print</button>
-<img src="images/f445627b-bd23-4ac3-a706-edd6c49cd2b7.png" style="display: none;" #logoImg /> -->

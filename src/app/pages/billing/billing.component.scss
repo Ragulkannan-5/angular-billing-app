@@ -27,7 +27,7 @@ tfoot {
       box-shadow: 0 0 15px rgba(0,0,0,0.1);
     }
     .title {
-      color: #006400;
+      color: #198754;
       font-weight: bold;
       font-size: 24px;
     }
@@ -74,3 +74,81 @@ margin-top: 6px;
 @media (max-width: 500px) {
   
 }
+
+  .green-switch {
+      position: relative;
+      display: inline-block;
+      width: 70px;
+      height: 34px;
+    }
+
+    /* Hide default checkbox */
+    .green-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    /* Slider background */
+    .green-switch .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #ccc;
+      border-radius: 34px;
+      transition: background-color 0.4s, box-shadow 0.4s;
+    }
+
+    /* Circle knob */
+    .green-switch .slider::before {
+      position: absolute;
+      content: "";
+      height: 26px; width: 26px;
+      left: 4px; bottom: 4px;
+      background-color: white;
+      border-radius: 50%;
+      transition: transform 0.4s, background-color 0.4s, box-shadow 0.4s;
+    }
+
+    /* When checked -> green background + glow */
+    .green-switch input:checked + .slider {
+      background-color: #4CAF50; /* green */
+      box-shadow: 0 0 20px rgba(76, 175, 80, 0.8);
+    }
+
+    /* Move knob + glow */
+    .green-switch input:checked + .slider::before {
+      transform: translateX(36px);
+      background-color: #a5d6a7;
+      box-shadow: 0 0 15px #66bb6a;
+    }
+
+    /* Optional pulse animation when ON */
+    .green-switch input:checked + .slider::before {
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { box-shadow: 0 0 5px #66bb6a; }
+      to   { box-shadow: 0 0 40px #2e7d32; }
+    }
+
+    .itemcls{
+  display: flex;
+    align-items: center;
+}
+.summary {
+     text-align: right;
+    // margin-top: 20px;
+     margin-right: 50px;
+ }
+
+ .savebutton{
+  background-color: #2e7d32;
+  color: #ffffff;
+ }
+ 
+  .Dowload-btn{
+  background-color:  #2e7d32;
+  color: #ffffff;
+ }

@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { PreviewpdfComponent } from '../../pages/previewpdf/previewpdf.component';
 import { CommonService } from '../../commonservice/common.service';
 import { HttpClient } from '@angular/common/http';
+import { MatDrawerToggleResult, MatSidenav } from '@angular/material/sidenav';
 interface BillDetails {
   billNo?: number;
   clientname: string;
@@ -20,17 +21,20 @@ interface BillDetails {
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
-
   constructor(private router: Router,private dialog: MatDialog,public  commonService:CommonService,private http: HttpClient,){}
 
   goToPrint() {
-    this.router.navigate(['/print-invoice'], {
+    this.router.navigate(['Productlist'], {
       state: {
       }
     });
   }
+  sidnavtogglefun() {
+   this.commonService.Issidenav = !this.commonService.Issidenav;
+  }
 
   openDialog() {
+    this.savebill();
     console.log(this.commonService.rows)
     // this.dialog.open(PreviewpdfComponent, {
     // width: '1320px',
@@ -41,6 +45,10 @@ export class NavbarComponent {
   }
 
   savebill(){
+    if(this.commonService.clientname == '' || this.commonService.clientphoneno == '' || this.commonService.clientAddress==''){
+    alert("Enter the Client Details")
+    return;
+  }
   var BillDetailslist : BillDetails = {
    billNo: this.commonService.estimateNo,
   clientname: this.commonService.clientname,
@@ -77,18 +85,16 @@ var json = {};
 }
 
  pdfdownload(){
-  // if(this.commonService.clientname == '' || this.commonService.clientphoneno == '' || this.commonService.clientAddress==''){
-  //   alert("Enter the Client Details")
-  //   return;
-  // }
+  
   // this.savebill();
+  var apiUrl = (window as any).appConfig.apiUrl;
    const printContents = document.getElementById('printable-area')!.innerHTML;
     var payload ={
                 "html": printContents,
                 "header_data": "string",
                 "pdfname": "string"
               };
-this.http.post<Blob>('http://localhost:7200/PrintBill/PdfPreviewbyHandler', payload, {
+this.http.post<Blob>(apiUrl+'PrintBill/PdfPreviewbyHandler', payload, {
   responseType: 'blob' as 'json'  // 👈 Tell Angular it's a Blob, not JSON
 })
 .subscribe((response: Blob) => {

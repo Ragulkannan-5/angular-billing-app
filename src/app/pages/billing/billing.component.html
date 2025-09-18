@@ -1,49 +1,74 @@
  
-
-
 <mat-card class="card">
-
     <mat-accordion class="cardstyle">
+     
         <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
           <mat-expansion-panel-header>
             <mat-panel-title> <span> <label>Client Details </label></span> &nbsp;
-    <button class="btn btn-success btn-sm" (click)="openClientDialog()" style="zoom: 0.7; margin-bottom: 2px;" ><i class="bi bi-plus-lg"></i></button>
-   </mat-panel-title>
+              <button class="btn btn-success btn-sm" (click)="openClientDialog()" style="zoom: 0.7; margin-bottom: 2px;" ><i class="bi bi-plus-lg"></i></button>
+            </mat-panel-title>
+            <div>
+              <button class="btn savebutton btn-sm" (click)="savebill()" style="zoom: 0.7; margin-left: 10px; width: 70px;" >Save<i class="bi bi-bookmark-check-fill" style="padding-left: 3px;"></i></button>
+              <button class="btn Dowload-btn btn-sm" (click)=" pdfdownload()" style="zoom: 0.7;margin-left: 20px;margin-right: 10px;;" >Download <i class="bi bi-cloud-download"></i></button>
+            </div>
           </mat-expansion-panel-header>
-          <mat-divider></mat-divider>
-<div class="d-flex justify-content-between align-items-center mb-3 ">
- <div class="row Lapview">
-    <div class="col" style="
-    min-width: 300px;
-">
-       <div class="contacts">
-        
-        <p><strong>Bill To:</strong><br>
-          {{commonService.clientname}}<br>
-          {{commonService.clientAddress}}<br>
-           Phone :{{commonService.clientphoneno}}</p>
-      </div>
-    </div>
-    <div class="col">
-      <p><strong>Estimate No:</strong>{{commonService.estimateNo}}</p>
-        <p><strong>Estimate Date:</strong> {{commonService.estimateDate || 'dd-MM-yyyy' }}</p>
-    </div>
-    <div class="col">
-      <label for="discount" style=" display: flex; align-items: center;" class="me-2">Discount %:</label>
-    <input
-      type="number"
-      class="form-control"
-      [(ngModel)]="commonService.discountPercent"
-      (input)="recalculateAll()"
-      min="0"
-      max="100"
-      style="width: 70px"
-    />
-    </div>
-  </div>
+        <mat-divider></mat-divider>
 
-</div>
+        <div class="d-flex justify-content-between align-items-center mb-3 ">
+          <div class="row Lapview">
+            
+              <div class="col" style=" min-width: 300px;">
+                <div class="contacts">
+                  <p><strong>Bill To:</strong><br>
+                    {{commonService.clientname}}<br>
+                    {{commonService.clientAddress}}<br>
+                    Phone :{{commonService.clientphoneno}}</p>
+                </div>
+              </div>
+              <div class="col" style=" min-width: 300px;">
+                <p><strong>Estimate No:</strong>
+                  <br> {{commonService.estimateNo}}</p>
+                  <p><strong>Estimate Date:</strong><br> {{commonService.estimateDate || 'dd-MM-yyyy' }}</p>
+              </div>
+              <div class="col" style=" min-width: 300px;">
+                <div style="display: flex;margin-top: 5px;">
+                  <label for="discount" style=" display: flex; align-items: center;" class="me-2">Discount %:</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  [(ngModel)]="commonService.discountPercent"
+                  (input)="recalculateAll()"
+                  min="0"
+                  max="100"
+                  style="width: 70px"
+                /> </div>
+              <div class="itemcls" style="padding-top: 5px;">
+                <label>Extra Discount : </label>
+                <label class="green-switch" style="zoom: 0.5; margin-left: 4px;" > 
+                  <input type="checkbox">
+                  <span class="slider" (click)="swich()"></span>
+                </label>
+              </div>
+              </div>
+              <div class="col" style=" min-width: 300px;">
+                <div class="itemcls"  [style.display]="commonService.extradis ? 'block' : 'none'">
+                <label for="discount" style=" display: flex; align-items: center;" class="me-2">Extra discount % </label>
+                <input
+                  type="number"
+                  class="form-control"
+                  [(ngModel)]="commonService.ExtdiscountPercent"
+                  (input)="recalculateAll()"
+                  min="0"
+                  max="100"
+                  style="width: 70px"
+                />
+               </div>
+              </div>
+
+          </div>
+        </div>
         </mat-expansion-panel>
+
     </mat-accordion>
     
   <table class="table table-bordered table-hover table-striped" style="border-radius: 4px !important;">
@@ -108,13 +133,17 @@
         <td colspan="4" class="text-end"><strong>Total Amount</strong></td>
         <td colspan="2">{{ commonService.totalAmount.toFixed(2) }}</td>
       </tr>
+       
     </tfoot>
   </table>
-
+<div class="summary" [style.display]="commonService.extradis ? 'block' : 'none'">
+    <p><strong> EXT Total Discount ({{ commonService.ExtdiscountPercent }}%) :</strong>  {{ commonService.ExttotalDiscountPrice.toFixed(2) }}</p>
+    <p><strong>Grand Total: </strong> {{ commonService.ExttotalAmount.toFixed(2) }}</p>
+</div>
   <datalist id="products">
     <option *ngFor="let p of products" [value]="p.productName"></option>
   </datalist>
 </mat-card>
 
  
-
+<app-print-invoice id="printable-area"  style="display: none;" ></app-print-invoice>

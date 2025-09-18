@@ -9,7 +9,12 @@ import { CommonService } from '../../commonservice/common.service';
 export class DashboardComponent {
 opened : boolean = true;
 events: string[] = [];
+ public onSideNavChange : any = "starting";
 constructor(public commonService : CommonService){
 
+}
+
+fuction(){
+  this.commonService.Issidenav =!this.commonService.Issidenav;
 }
 }

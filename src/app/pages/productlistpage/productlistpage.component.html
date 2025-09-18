@@ -17,95 +17,103 @@
   </mat-grid-tile>
 </mat-grid-list> -->
 
-<div class="container mt-4">
-<div class="row mb-3 align-items-center g-2">
-  <!-- Search Field -->
+<div class=" mt-4" style="padding: 10px;">
+<!-- Your existing row -->
+<div class="row mb-3 align-items-center g-3 p-3 bg-white rounded-3 shadow-sm">
+  <!-- Search -->
   <div class="col-12 col-md-auto">
-    <mat-form-field appearance="outline" style="min-width: 250px;">
-      <mat-label>Search Products</mat-label>
-      <input matInput placeholder="Type to search..." [(ngModel)]="searchText" (input)="applyFilter()" />
-      <button mat-icon-button matSuffix *ngIf="searchText" style="zoom: 0.6;" (click)="searchText=''; applyFilter()">
-        <mat-icon>close</mat-icon>
-      </button>
-    </mat-form-field>
+    <input type="text" class="form-control" placeholder="Search Products..."
+           [(ngModel)]="searchText" (input)="applyFilter()" />
   </div>
 
-  <!-- Category Dropdown -->
+  <!-- Category -->
   <div class="col-12 col-md-auto">
-  <mat-form-field appearance="outline" style="min-width: 200px;">
-  <mat-label>Category</mat-label>
-  <mat-select formControlName="category" (selectionChange)="categoryfilter($event.value)">
-    <mat-option value="rest">Select</mat-option>
-    <mat-option *ngFor="let category of categories" [value]="category">
-      {{ category }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-
+    <select class="form-select" [(ngModel)]="selectedCategory" (change)="categoryfilter(selectedCategory)">
+      <option value="rest" >Select Category</option>
+      <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+    </select>
   </div>
 
-  <!-- Action Button -->
+  <!-- Add Button -->
   <div class="col-12 col-md-auto">
-    <button mat-raised-button color="primary" (click)="addProduct()">
-      <mat-icon>add</mat-icon> Add Product
+    <button class="btn btn-primary rounded-pill shadow px-4"
+            (click)="addProduct(); showCrackers($event)">
+      <i class="bi bi-plus-lg"></i> Add Product
     </button>
+  </div>
+
+  <!-- Total -->
+  <div class="col-12 col-md-auto">
+    <div class="px-3 py-2 bg-light text-primary fw-bold rounded shadow-sm">
+      Total Products: {{ filteredProducts.length }}
+    </div>
   </div>
 </div>
 
- 
-  <div class="row">
-    <div class="col-md-4 col-sm-6 mb-4" *ngFor="let item of filteredProducts">
-      <mat-card class="example-card" appearance="outlined" style=" zoom: 0.7;">
-        <mat-card-header>
-          <mat-card-title-group>
-            <mat-card-title>{{ item.productName }}</mat-card-title>
-            <mat-card-subtitle>Price: {{ item.price }} Rs</mat-card-subtitle>
-            <img src="images/crackersimage/OIP.webp" 
-                 style="width: 50px;height: 50px;">
-          </mat-card-title-group>
-        </mat-card-header>
-<mat-divider></mat-divider>
-        <mat-card-content>
-          <div class="row">
-            <div class="col-sm">
-              Quantity: {{ item.baseQuantity }}
-            </div>
-            <div class="col-sm">
-              Stack: {{ item.currentstack }}
-            </div>
-          </div>
-         
-        </mat-card-content>
+<!-- 🔥 Fireworks Layer -->
+<div id="cracker-animation"></div>
 
-        <mat-action-list style="display: flex; zoom: 0.8;">
-          <div>
-            <button class="button edit-btn" (click)="editProduct(item)">
-              <div class="trash">
+
+
+
+ 
+<div class="row">
+  <div *ngFor="let category of categorys" class="mb-4">
+    
+    <div style="display: flex ;">
+      <p class="h5 mt-3">{{ category }}</p>
+      <strong style="margin: 15px;"> Total : {{getProductsByCategory(category).length }}</strong>
+     </div>
+    
+    <mat-divider></mat-divider>
+
+    <div class="row" style="margin-top: 15px;">
+      <div class="col-md-3 col-sm-6 mb-4"
+           *ngFor="let item of getProductsByCategory(category)">
+        
+        <mat-card class="example-card product-box"  appearance="outlined" style="zoom: 0.9;">
+          <mat-card-header>
+            <mat-card-title-group>
+              <mat-card-title>{{ item.productName }}</mat-card-title>
+              <mat-card-subtitle>Price: {{ item.price }} Rs</mat-card-subtitle>
+              <img src="images/crackersimage/OIP.webp" style="width: 50px; height: 50px;">
+            </mat-card-title-group>
+          </mat-card-header>
+
+          <mat-divider></mat-divider>
+
+          <mat-card-content>
+            <div class="row">
+              <div class="col-sm">
+                Quantity: {{ item.baseQuantity }}
+              </div>
+              <div class="col-sm">
+                Stock: {{ item.currentstack }}
+              </div>
+            </div>
+          </mat-card-content>
+
+          <mat-action-list class="d-flex" style="zoom: 0.85;">
+            <div>
+              <button class="button edit-btn" (click)="editProduct(item)">
                 <i class="bi bi-scissors"></i>
-              </div>
-              <span>Edit</span>
-            </button>
-          </div>
-          <div>
-            <button class="button delete-btn" (click)="deleteProduct(item)">
-              <div class="trash">
-                <div class="top">
-                  <div class="paper"></div>
-                </div>
-                <div class="box"></div>
-                <div class="check">
-                  <svg viewBox="0 0 8 6">
-                    <polyline points="1 3.4 2.71428571 5 7 1"></polyline>
-                  </svg>
-                </div>
-              </div>
-              <span>Delete Item</span>
-            </button>
-          </div>
-        </mat-action-list>
-      </mat-card>
+                <span>Edit</span>
+              </button>
+            </div>
+            <div>
+              <button class="button delete-btn" (click)="deleteProduct(item)">
+                <span>Delete Item</span>
+              </button>
+            </div>
+          </mat-action-list>
+        </mat-card>
+
+      </div>
     </div>
   </div>
+</div>
+
+
 </div>
 
  

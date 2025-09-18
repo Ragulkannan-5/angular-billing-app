@@ -29,7 +29,7 @@ export class ClientdetailsComponent {
         username: this.commonService.clientname ,
         address: this.commonService.clientAddress,
         phone: this.commonService.clientphoneno,
-        estimateNo: this.commonService.estimateNo,
+       // estimateNo: this.commonService.estimateNo,
         estimateDate: this.commonService.estimateDate
       };
       // Bind the values to the form
@@ -49,7 +49,7 @@ export class ClientdetailsComponent {
       this.commonService.clientname = formValues.username
       this.commonService.clientAddress = formValues.address
       this.commonService.clientphoneno = formValues.phone
-      this.commonService.estimateNo = formValues.estimateNo
+      //this.commonService.estimateNo = formValues.estimateNo
       this.commonService.estimateDate = formValues.estimateDate
 
       this.dialogRef.close(this.clientForm.value);

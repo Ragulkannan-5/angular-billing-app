@@ -1,40 +1,21 @@
- <!-- <mat-nav-list> -->
-    <mat-list-item>
-      <a class="menu-icons">
-        <mat-icon>house</mat-icon>
-        <span>Home</span>
-      </a>
-    </mat-list-item>
-    <mat-list-item>
-      <a class="menu-icons">
-        <mat-icon>person</mat-icon>
-        <span>Profile</span>
-      </a>
-    </mat-list-item>
-    <mat-list-item>
-      <a class="menu-icons">
-        <mat-icon>info</mat-icon>
-        <span>Information</span>
-      </a>
-    </mat-list-item>
-
-    <mat-divider></mat-divider>
-
-    <mat-list-item>
-      <a class="menu-icons">
-        <mat-icon>help</mat-icon>
-        <span>Help</span>
-      </a>
-    </mat-list-item>
-
-    <div class="bottom-nav">
-      <mat-divider></mat-divider>
-    
-      <mat-list-item>
-        <a class="menu-icons">
-          <mat-icon>settings</mat-icon>
-          <span>Settings</span>
-        </a>
-      </mat-list-item>
+<mat-nav-list>
+  <a mat-list-item class="hovering" (click)="navigatetopage('Billing')">
+    <div class="itemcls">
+       <i class="bi bi-coin" style="zoom: 1.5; margin-right: 4px;"></i>
+    <span *ngIf="expanded">Billing</span>
     </div>
-    <!-- </mat-nav-list> -->
+   
+  </a>
+  <a mat-list-item (click)="navigatetopage('Productlist')">
+    <div class="itemcls">
+      <i class="bi bi-truck" style="zoom: 1.5; margin-right: 4px;"></i>
+    <span *ngIf="expanded">Productlist</span>
+    </div>
+  </a>
+  <a mat-list-item (click)="navigatetopage('Billdetails')">
+    <div class="itemcls">
+    <i class="bi bi-receipt" style="zoom: 1.5; margin-right: 4px;"></i>
+    <span *ngIf="expanded">Billdetails</span>
+    </div>
+  </a>
+</mat-nav-list>

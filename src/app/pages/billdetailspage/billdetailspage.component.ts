@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { BillDetails, CommonService } from '../../commonservice/common.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-billdetailspage',
@@ -10,8 +11,8 @@ export class BilldetailspageComponent implements OnInit {
   bills: BillDetails[] = [];
   filteredBills: BillDetails[] = [];
   searchText: string = '';
-
-  constructor(private billService: CommonService) {}
+readonly panelOpenState = signal(false);
+  constructor(private billService: CommonService,private router: Router) {}
 
   ngOnInit(): void {
     this.loadBills();
@@ -52,6 +53,10 @@ export class BilldetailspageComponent implements OnInit {
     } catch (e) {
       alert("Invalid JSON");
     }
+     this.router.navigate(["Billing"], {
+      state: {
+      }
+    });
     // this.billService.rows = bill.billjson;
 
 

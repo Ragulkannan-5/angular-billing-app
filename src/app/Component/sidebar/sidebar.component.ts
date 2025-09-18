@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
+@Input() expanded: boolean = true;
+constructor(private router: Router){
 
+}
+navigatetopage(route:any) {
+    this.router.navigate([route], {
+      state: {
+      }
+    });
+  }
 }

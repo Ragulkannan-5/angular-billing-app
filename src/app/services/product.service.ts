@@ -19,12 +19,13 @@ export interface Product {
   providedIn: 'root'
 })
 export class ProductService {
-  private productsUrl = 'http://localhost:7200/Productlist/Getproduct';
+    apiUrl = (window as any).appConfig.apiurl;
+  private productsUrl = this.apiUrl+'Productlist/Getproduct';
 
   constructor(private http: HttpClient) { }
 
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.productsUrl,);
+    return this.http.get<Product[]>(this.productsUrl);
   }
   
 }

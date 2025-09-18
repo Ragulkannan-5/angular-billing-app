@@ -1,0 +1,26 @@
+/* Smooth transitions */
+a[mat-list-item] {
+  transition: background-color .2s ease, color .2s ease;
+}
+
+/* Hover background (works with MDC state layer) */
+a[mat-list-item]:hover .mdc-list-item__ripple::before {
+  background-color: #e3f2fd;  /* light blue */
+  opacity: 1;                  /* show the state layer */
+}
+
+/* Optional: also color the whole row as a fallback */
+a[mat-list-item]:hover {
+  background-color: #e3f2fd !important;
+}
+
+/* Text + icon color on hover */
+a[mat-list-item]:hover .mdc-list-item__primary-text,
+a[mat-list-item]:hover mat-icon {
+  color: #047803;
+}
+
+.itemcls{
+  display: flex;
+    align-items: center;
+}

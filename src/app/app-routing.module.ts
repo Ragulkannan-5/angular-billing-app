@@ -4,19 +4,40 @@ import { BillingComponent } from './pages/billing/billing.component';
 import { PrintInvoiceComponent } from './pages/print-invoice/print-invoice.component';
 import { DashboardModule } from './pages/dashboard/dashboard.module';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ProductlistpageComponent } from './pages/productlistpage/productlistpage.component';
+import { BilldetailspageComponent } from './pages/billdetailspage/billdetailspage.component';
 
 const routes: Routes = [
    {
     path: '',
-    redirectTo: 'auth/dashbord',
+    redirectTo: 'Billing',
     pathMatch: 'full',
   },
-  { path: 'auth/dashbord', component: DashboardComponent,
+  { path: '',
+    component: DashboardComponent,
     children: [
-      {
-        path: '',
-        loadChildren: () => import('../app/pages/dashboard/dashboard.module').then(m => m.DashboardModule),
-      },
+       {
+    path: 'Billing',
+    component:BillingComponent
+    //loadChildren: () => import('../billing/billing.component').then(m => m.BillingComponent),
+  },
+  {
+    path: 'Productlist',
+    pathMatch: 'full',
+    component:ProductlistpageComponent
+   // loadChildren: () => import('../productlistpage/productlistpage.component').then(m => m.ProductlistpageComponent),
+  },
+  {
+    path: 'Billdetails',
+    pathMatch: 'full',
+    component:BilldetailspageComponent
+    //loadChildren: () => import('../billdetailspage/billdetailspage.component').then(m => m.BilldetailspageComponent),
+  },
+  {
+    path: '',
+    redirectTo: 'Billing',
+    pathMatch: 'full',
+  },
     ]
    },
   { path: 'print-invoice', component: PrintInvoiceComponent },

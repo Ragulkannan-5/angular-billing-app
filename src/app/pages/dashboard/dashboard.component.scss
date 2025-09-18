@@ -32,7 +32,7 @@ mat-sidenav-container {
   height: 100%; /* subtract toolbar height */
 }
 mat-toolbar{
-  background-color: #283593;
+  background-color: #2f40c4;
 
 }
 .toolbar{
@@ -48,5 +48,29 @@ mat-sidenav-content{
 }
 
 
+.app-sidenav {
+  width: 250px;
+  transition: width 0.3s;
+}
 
+.app-sidenav.mini {
+  width: 60px; /* closed but still shows icons */
+  overflow-x: hidden;
+}
 
+.app-sidenav.expanded {
+  width: 250px;
+}
+
+.card_content {
+  height: calc(100vh + 15px) !important; /* fixed height */
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+
+.card-scroll {
+  flex: 1;
+  overflow-y: auto; /* enable vertical scroll */
+  padding: 0px; /* optional inner spacing */
+}
